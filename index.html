@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>The HTML5 Herald</title>
+    <meta name="description" content="The HTML5 Herald" />
+    <meta name="author" content="SitePoint" />
+
+    <link rel="stylesheet" href="css/styles.css?v=1.0" />
+  </head>
+
+  <style>
+    body {
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 99vh;
+      overflow: hidden;
+    }
+    .part {
+      background: rgba(125, 55, 0, 0.3);
+      border: 13px solid transparent;
+      border-color: rgba(255, 40, 40, 0.35);
+      border-radius: 25%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: -8px;
+      animation: anim 40s cubic-bezier(0.7, -0.98, 0.735, 0.305) infinite;
+    }
+
+    @keyframes anim {
+      100% {
+        transform: rotateZ(1turn);
+      }
+    }
+  </style>
+
+  <body>
+    <div id="container" class="part"></div>
+
+    <script>
+      const partsCount = 33;
+      const addPart = (toElem, idx) => {
+        const child = document.createElement("div");
+        child.setAttribute("id", `part-${idx}`);
+        child.setAttribute("class", "part");
+        toElem.appendChild(child);
+      };
+
+      const firstElem = document.getElementById("container");
+
+      if (firstElem) {
+        addPart(firstElem, 0);
+      }
+
+      for (let i = 0; i < partsCount; i++) {
+        const elem = document.getElementById(`part-${i}`);
+        addPart(elem, i + 1);
+      }
+
+      const parts = document.getElementsByClassName("part");
+      for (let i = 0; i < partsCount; i++) {
+        let random = Math.floor(Math.random() * partsCount);
+        addPart(parts[random], partsCount + i - 1);
+      }
+    </script>
+  </body>
+</html>
